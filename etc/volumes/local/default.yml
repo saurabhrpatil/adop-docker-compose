@@ -8,15 +8,11 @@ ldap:
       - ldap_db:/var/lib/ldap
       - ldap_static:/etc/ldap
 
-gerrit-mysql:
+gitlab:
   volumes:
-    - gerrit_mysql_data:/var/lib/mysql
-
-gerrit:
-  user: root
-  volumes:
-    - git_repos:/var/git/repos 
-    - gerrit_review_site:/var/gerrit/review_site 
+    - gitlab_etc:/etc/gitlab
+    - gitlab_opt:/var/opt/gitlab
+    - gitlab_log:/var/log/gitlab
 
 sonar-mysql:
   volumes:
