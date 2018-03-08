@@ -30,10 +30,6 @@ gitlab:
     - "80"
     - "443"
     - "22"
-  volumes:
-    - gitlab_etc:/etc/gitlab
-    - gitlab_opt:/var/opt/gitlab
-    - gitlab_log:/var/log/gitlab
   environment:
     GITLAB_ROOT_PASSWORD: ${PASSWORD_GITLAB}
     GITLAB_OMNIBUS_CONFIG: |
