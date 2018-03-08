@@ -83,7 +83,7 @@ ldap:
   container_name: ldap
   restart: always
   #build: ../images/docker-ldap/
-  image: accenture/adop-ldap:0.1.3
+  image: deangodfree/adop-ldap:latest
   net: ${CUSTOM_NETWORK_NAME}
   expose:
     - "389"
@@ -94,65 +94,11 @@ ldap:
     INITIAL_ADMIN_PASSWORD: ${INITIAL_ADMIN_PASSWORD}
     JENKINS_PLATFORM_USERNAME: ${JENKINS_PLATFORM_USERNAME}
     JENKINS_PASSWORD: ${JENKINS_PWD}
-    GERRIT_PLATFORM_USERNAME: ${GERRIT_PLATFORM_USERNAME}
-    GERRIT_PASSWORD: ${GERRIT_PWD}
+    GITLAB_PLATFORM_USERNAME: ${GITLAB_PLATFORM_USERNAME}
+    GITLAB_PASSWORD: ${GITLAB_PWD}
     SLAPD_PASSWORD: ${LDAP_PWD}
     SLAPD_DOMAIN: ${LDAP_DOMAIN}
     SLAPD_FULL_DOMAIN: ${LDAP_FULL_DOMAIN}
-
-gerrit-mysql:
-  container_name: gerrit-mysql
-  restart: always
-  image: mysql:5.6.25
-  net: ${CUSTOM_NETWORK_NAME}
-  expose:
-    - "3306"
-  environment:
-    MYSQL_ROOT_PASSWORD: ${PASSWORD_SQL}
-    MYSQL_USER: ${GERRIT_MYSQL_USER}
-    MYSQL_PASSWORD: ${GERRIT_MYSQL_PASSWORD}
-    MYSQL_DATABASE: ${GERRIT_MYSQL_DATABASE}
-
-gerrit:
-  container_name: gerrit
-  restart: always
-  #build: ../images/docker-gerrit/
-  image: accenture/adop-gerrit:0.1.3
-  privileged: true
-  net: ${CUSTOM_NETWORK_NAME}
-  expose:
-    - "8080"
-    - "29418"
-  environment:
-    - "dependency:container==gerrit-mysql"
-    - "REPO_PATH=/var/git/repos"
-    - "WEBURL=${PROTO}://${TARGET_HOST}/gerrit/"
-    - "DATABASE_TYPE=mysql"
-    - "DB_HOSTNAME=gerrit-mysql"
-    - "DB_PORT=3306"
-    - "DB_NAME=${GERRIT_MYSQL_DATABASE}"
-    - "DB_USER=${GERRIT_MYSQL_USER}"
-    - "DB_PASSWORD=${GERRIT_MYSQL_PASSWORD}"
-    - "AUTH_LOGOUTURL=${PROTO}://${TARGET_HOST}/gerrit/"
-    - "AUTH_TYPE=LDAP"
-    - "GERRIT_PASSWORD=${PASSWORD_GERRIT}"
-    - "JENKINS_PASSWORD=${PASSWORD_JENKINS}"
-    - "INITIAL_ADMIN_USER=${INITIAL_ADMIN_USER}"
-    - "INITIAL_ADMIN_PASSWORD=${INITIAL_ADMIN_PASSWORD_PLAIN}"
-    - "LDAP_SERVER=${LDAP_SERVER}"
-    - "LDAP_ACCOUNTBASE=${LDAP_FULL_DOMAIN}"
-    - "LDAP_ACCOUNTPATTERN=${LDAP_ACCOUNTPATTERN}"
-    - "LDAP_ACCOUNTFULLNAME=${LDAP_ACCOUNTFULLNAME}"
-    - "LDAP_ACCOUNTEMAILADDRESS=mail"
-    - "LDAP_USERNAME=${LDAP_ADMIN},${LDAP_FULL_DOMAIN}"
-    - "LDAP_PASSWORD=${LDAP_PWD}"
-    - "LDAP_GROUPBASE=${LDAP_GROUP_BASE_DN},${LDAP_FULL_DOMAIN}"
-    - "LDAP_GROUPPATTERN=${LDAP_GROUPPATTERN}"
-    - "LDAP_GROUPMEMBERPATTERN=${LDAP_GROUPMEMBERPATTERN}"
-    - "HTTPD_LISTENURL=proxy-${PROTO}://0.0.0.0:8080/gerrit"
-    - "USER_NAME=${GERRIT_USER_NAME}"
-    - "USER_EMAIL=${GERRIT_USER_EMAIL}"
-    - "DOWNLOAD_SCHEME=http"
 
 sonar-mysql:
   container_name: sonar-mysql
@@ -205,7 +151,7 @@ jenkins:
   privileged: true
   environment:
   # Passwords Pairs used in the maskpassword.groovy in init.groovy.d
-    JENKINS_MASK_PASSWORD_VARS: "SONAR_ACCOUNT_PASSWORD,LDAP_MANAGER_PASSWORD,INITIAL_ADMIN_PASSWORD,GERRIT_JENKINS_PASSWORD,CREDENTIALS_LDAP_SERVICE_USER_PASSWORD"
+    JENKINS_MASK_PASSWORD_VARS: "SONAR_ACCOUNT_PASSWORD,LDAP_MANAGER_PASSWORD,INITIAL_ADMIN_PASSWORD,CREDENTIALS_LDAP_SERVICE_USER_PASSWORD"
   # MASKPASSWORD: ""
     JENKINS_OPTS: "--prefix=/jenkins"
     ROOT_URL: "${PROTO}://${TARGET_HOST}/jenkins/"
@@ -225,10 +171,6 @@ jenkins:
     LDAP_GROUP_NAME_ADMIN: "${LDAP_GROUP_NAME_ADMIN}"
     INITIAL_ADMIN_USER: ${INITIAL_ADMIN_USER}
     INITIAL_ADMIN_PASSWORD: ${INITIAL_ADMIN_PASSWORD_PLAIN}
-    GERRIT_HOST_NAME: "gerrit"
-    GERRIT_FRONT_END_URL: "http://gerrit:8080/gerrit"
-    GERRIT_JENKINS_USERNAME: "${GERRIT_JENKINS_USERNAME}"
-    GERRIT_JENKINS_PASSWORD: ${PASSWORD_JENKINS}
     SONAR_SERVER_URL: "http://sonar:9000/sonar/"
     SONAR_ACCOUNT_LOGIN: ${SONAR_ACCOUNT_LOGIN}
     SONAR_ACCOUNT_PASSWORD: ${PASSWORD_JENKINS}
@@ -254,7 +196,6 @@ jenkins:
     CARTRIDGE_SOURCES: ${CARTRIDGE_SOURCES}
     JENKINS_SHARED_LIBRARY: "ssh://git@innersource.accenture.com/gskdo/jenkins-pipeline-libs.git"
     AEM_SHARED_LIBRARY: "ssh://git@innersource.accenture.com/gskdo/aem-pipeline-libs.git"
-    ADOP_GERRIT_ENABLED: "false"
     ADOP_GITLAB_ENABLED: "true"
     GIT_REPO: "gitlab"
     GITLAB_FRONT_END_URL: "http://gitlab/gitlab"
