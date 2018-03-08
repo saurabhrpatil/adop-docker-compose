@@ -26,6 +26,7 @@ export GERRIT_MYSQL_PASSWORD="gerrit"
 export GERRIT_MYSQL_DATABASE="gerrit"
 
 # Gitlab
+export GITLAB_PLATFORM_USERNAME="gitlab"
 export GITLAB_PWD="gitlab"
 export SMTP_DOMAIN="awsamazon.com"
 export ADOP_SMTP_ENABLED="true"
