@@ -10,18 +10,12 @@ ldap:
     - ${NFS_HOST}/nfs/ldap_db:/var/lib/ldap
     - ${NFS_HOST}/nfs/ldap_static:/etc/ldap
 
-gerrit-mysql:
+gitlab:
   volume_driver: nfs
   volumes:
-    - ${NFS_HOST}/nfs/gerrit_mysql_data:/var/lib/mysql
-
-gerrit:
-  user: root
-  volume_driver: nfs
-  volumes:
-    - ${NFS_HOST}/nfs/git_repos:/var/git/repos 
-    - ${NFS_HOST}/nfs/gerrit_review_site:/var/gerrit/review_site 
-
+    - ${NFS_HOST}/nfs/gitlab_opt:/var/opt/gitlab
+    - ${NFS_HOST}/nfs/gitlab_log:/var/log/gitlab
+    
 sonar-mysql:
   volume_driver: nfs
   volumes:
