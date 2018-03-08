@@ -31,7 +31,7 @@ gitlab:
     - "443"
     - "22"
   environment:
-    GITLAB_ROOT_PASSWORD: ${PASSWORD_GITLAB}
+    GITLAB_ROOT_PASSWORD: ${GITLAB_PWD}
     GITLAB_OMNIBUS_CONFIG: |
       gitlab_rails['smtp_enable'] = '${ADOP_SMTP_ENABLED}'
       gitlab_rails['smtp_address'] = 'mail-server'
