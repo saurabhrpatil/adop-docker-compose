@@ -197,7 +197,7 @@ jenkins:
     GITLAB_FRONT_END_URL: "http://gitlab/gitlab"
     GITLAB_JENKINS_USERNAME: "jenkins"
     GITLAB_JENKINS_PASSWORD: ${PASSWORD_JENKINS}
-    GITLAB_ROOT_PASSWORD: ${PASSWORD_GITLAB}
+    GITLAB_ROOT_PASSWORD: ${GITLAB_PWD}
 
 jenkins-slave:
   container_name: jenkins-slave
@@ -211,7 +211,7 @@ jenkins-slave:
     SLAVE_EXECUTORS: ${SLAVE_EXECUTORS}
     INITIAL_ADMIN_USER: ${INITIAL_ADMIN_USER}
     INITIAL_ADMIN_PASSWORD: ${INITIAL_ADMIN_PASSWORD_PLAIN}
-    PASSWORD_GITLAB: ${PASSWORD_GITLAB}
+    PASSWORD_GITLAB: ${GITLAB_PWD}
 
 selenium-hub:
   container_name: selenium-hub
