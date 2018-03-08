@@ -12,17 +12,11 @@ ldap:
     syslog-address: "udp://${LOGSTASH_HOST}:25826"
     tag: "ldap"
 
-gerrit-mysql:
+gitlab:
   log_driver: "syslog"
   log_opt:
     syslog-address: "udp://${LOGSTASH_HOST}:25826"
-    tag: "gerrit-mysql"
-
-gerrit:
-  log_driver: "syslog"
-  log_opt:
-    syslog-address: "udp://${LOGSTASH_HOST}:25826"
-    tag: "gerrit"
+    tag: "gitlab"
 
 grafana:
   log_driver: "syslog"
