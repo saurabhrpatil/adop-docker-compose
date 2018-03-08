@@ -10,11 +10,11 @@ ldap:
     - ${NFS_HOST}/nfs/ldap_db:/var/lib/ldap
     - ${NFS_HOST}/nfs/ldap_static:/etc/ldap
 
-gitlab:
-  volume_driver: nfs
-  volumes:
-    - ${NFS_HOST}/nfs/gitlab_opt:/var/opt/gitlab
-    - ${NFS_HOST}/nfs/gitlab_log:/var/log/gitlab
+#gitlab:
+#  volume_driver: nfs
+#  volumes:
+#    - ${NFS_HOST}/nfs/gitlab_opt:/var/opt/gitlab
+#    - ${NFS_HOST}/nfs/gitlab_log:/var/log/gitlab
     
 sonar-mysql:
   volume_driver: nfs

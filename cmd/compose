@@ -149,7 +149,7 @@ done
         echo "* Skipping Loading the Platform"
     else
         echo "* Loading the Platform"
-        docker exec jenkins curl -s -X POST -u "${JENKINS_PLATFORM_USERNAME}":"${PASSWORD_JENKINS}" localhost:8080/jenkins/job/Load_Platform/buildWithParameters --data token=gAsuE35s
+        docker exec jenkins curl -s -X POST -u "${JENKINS_PLATFORM_USERNAME}":"${PASSWORD_JENKINS}" localhost:8080/jenkins/job/GitLab_Load_Platform/buildWithParameters --data token=UKdjguOElrnS
     fi
 
     # Generate and copy the certificates to jenkins slave if TLS is enabled
@@ -287,10 +287,11 @@ run_compose() {
         ADOPFILEOPTS="-f ${CLI_DIR}/docker-compose.yml -f ${CLI_DIR}/etc/volumes/${VOLUME_DRIVER}/default.yml -f ${CLI_DIR}/etc/logging/${LOGGING_DRIVER}/default.yml"
     fi
 
-    ELKFILEOPTS="-f ${CLI_DIR}/compose/elk.yml"
+    ELKFILEOPTS="-f ${CLI_DIR}/compose/docker-elk/docker-compose.yml"
 
     DOCKPROMFILEOPTS="-f ${CLI_DIR}/compose/dockprom/docker-compose.yml"
 
+    GITLABFILEOPTS="-f ${CLI_DIR}/compose/docker-gitlab/docker-compose.yml"
 
     # If total overrides have been provided then just use them
     # Else use "our" file list
@@ -300,9 +301,9 @@ run_compose() {
         # Handle up vs up -d so that we can launch the main Compose file
         if [ "${compose_cmd}" = "up" ] && [[ $@ != *"-d"* ]]; then
           echo "* Starting ELK with 'up -d' instead of just the requested 'up'"
-          docker-compose ${ELKFILEOPTS} ${compose_cmd} "$@" -d && docker-compose ${DOCKPROMFILEOPTS} ${compose_cmd} "$@" -d
+          docker-compose ${ELKFILEOPTS} ${compose_cmd} "$@" && docker-compose ${DOCKPROMFILEOPTS} ${compose_cmd} "$@" -d && docker-compose ${GITLABFILEOPTS} ${compose_cmd} "$@" -d
         else
-          docker-compose ${ELKFILEOPTS} ${compose_cmd} "$@" && docker-compose ${DOCKPROMFILEOPTS} ${compose_cmd} "$@"
+          docker-compose ${ELKFILEOPTS} ${compose_cmd} "$@" && docker-compose ${DOCKPROMFILEOPTS} ${compose_cmd} "$@" && docker-compose ${GITLABFILEOPTS} ${compose_cmd} "$@"
         fi;
         echo
         docker-compose ${ADOPFILEOPTS} ${OVERRIDES} ${compose_cmd} "$@"

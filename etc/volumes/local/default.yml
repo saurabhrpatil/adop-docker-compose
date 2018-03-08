@@ -8,11 +8,11 @@ ldap:
       - ldap_db:/var/lib/ldap
       - ldap_static:/etc/ldap
 
-gitlab:
-  volumes:
-    - gitlab_etc:/etc/gitlab
-    - gitlab_opt:/var/opt/gitlab
-    - gitlab_log:/var/log/gitlab
+#gitlab:
+#  volumes:
+#    - gitlab_etc:/etc/gitlab
+#    - gitlab_opt:/var/opt/gitlab
+#    - gitlab_log:/var/log/gitlab
 
 sonar-mysql:
   volumes:
