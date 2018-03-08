@@ -19,26 +19,15 @@ export LDAP_GROUPMEMBERPATTERN='(uniqueMember=${dn})'
 export LDAP_MANAGER_DN="cn=admin,dc=ldap,dc=example,dc=com"
 export LDAP_GROUP_NAME_ADMIN="administrators"
 
-# GitLab MySQL
-
-export GERRIT_MYSQL_USER="gerrit"
-export GERRIT_MYSQL_PASSWORD="gerrit"
-export GERRIT_MYSQL_DATABASE="gerrit"
-
 # Gitlab
 export GITLAB_PLATFORM_USERNAME="gitlab"
 export GITLAB_PWD="gitlab"
 export SMTP_DOMAIN="awsamazon.com"
 export ADOP_SMTP_ENABLED="true"
 
-# Gerrit
-export GERRIT_USER_NAME="Gerrit Code Review"
-export GERRIT_USER_EMAIL="gerrit@adop"
 
 # Gerrit and Jenkins
 export JENKINS_PLATFORM_USERNAME="jenkins"
-export GERRIT_PLATFORM_USERNAME="gerrit"
-export GERRIT_JENKINS_USERNAME="jenkins"
 
 # Sonar MySQL
 
