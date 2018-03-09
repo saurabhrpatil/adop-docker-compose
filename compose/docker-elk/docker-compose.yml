@@ -1,0 +1,45 @@
+#version: '2'
+
+#services:
+
+  elasticsearch:
+    build: elasticsearch/
+    volumes:
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+    net: ${CUSTOM_NETWORK_NAME}
+    restart: always
+    container_name: elasticsearch 
+    labels:
+      org.label-schema.group: "logging"
+
+  logstash:
+    build: logstash/
+    volumes:
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
+    ports:
+      - "5000:5000"
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    net: ${CUSTOM_NETWORK_NAME}
+    restart: always
+    container_name: logstash
+    labels:
+      org.label-schema.group: "logging"
+
+  kibana:
+    build: kibana/
+    volumes:
+      - ./kibana/config/:/usr/share/kibana/config:ro
+    ports:
+      - "5601:5601"
+    net: ${CUSTOM_NETWORK_NAME}
+    restart: always
+    container_name: kibana
+    labels:
+      org.label-schema.group: "logging"
