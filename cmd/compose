@@ -303,6 +303,7 @@ run_compose() {
           echo "* Starting ELK with 'up -d' instead of just the requested 'up'"
           #docker-compose ${ELKFILEOPTS} ${compose_cmd} "$@" && docker-compose ${DOCKPROMFILEOPTS} ${compose_cmd} "$@" -d && docker-compose ${GITLABFILEOPTS} ${compose_cmd} "$@" -d
         else
+          echo " Skipping..."
           #docker-compose ${ELKFILEOPTS} ${compose_cmd} "$@" && docker-compose ${DOCKPROMFILEOPTS} ${compose_cmd} "$@" && docker-compose ${GITLABFILEOPTS} ${compose_cmd} "$@"
         fi;
         echo
