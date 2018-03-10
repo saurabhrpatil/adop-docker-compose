@@ -308,9 +308,9 @@ run_compose() {
         fi;
         echo " Running regular adop containers "
         echo "  ADOPFILEOPTS: ${ADOPFILEOPTS} "
-        echo " pwd "
-        echo " ls -lrth"
-        echo "cat docker-compose.yml"
+        pwd 
+        ls -lrth
+        cat docker-compose.yml
         docker-compose ${ADOPFILEOPTS} ${compose_cmd} "$@"
     fi
 }
