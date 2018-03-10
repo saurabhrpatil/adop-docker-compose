@@ -307,7 +307,7 @@ run_compose() {
           #docker-compose ${ELKFILEOPTS} ${compose_cmd} "$@" && docker-compose ${DOCKPROMFILEOPTS} ${compose_cmd} "$@" && docker-compose ${GITLABFILEOPTS} ${compose_cmd} "$@"
         fi;
         echo
-        docker-compose ${ADOPFILEOPTS} ${OVERRIDES} ${compose_cmd} "$@"
+        docker-compose ${ADOPFILEOPTS} ${compose_cmd} "$@"
     fi
 }
 
