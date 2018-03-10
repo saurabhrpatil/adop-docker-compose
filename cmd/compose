@@ -307,6 +307,7 @@ run_compose() {
           #docker-compose ${ELKFILEOPTS} ${compose_cmd} "$@" && docker-compose ${DOCKPROMFILEOPTS} ${compose_cmd} "$@" && docker-compose ${GITLABFILEOPTS} ${compose_cmd} "$@"
         fi;
         echo " Running regular adop containers "
+        echo "  ADOPFILEOPTS: ${ADOPFILEOPTS} "
         docker-compose ${ADOPFILEOPTS} ${compose_cmd} "$@"
     fi
 }
