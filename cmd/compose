@@ -306,7 +306,7 @@ run_compose() {
           echo " Skipping..."
           #docker-compose ${ELKFILEOPTS} ${compose_cmd} "$@" && docker-compose ${DOCKPROMFILEOPTS} ${compose_cmd} "$@" && docker-compose ${GITLABFILEOPTS} ${compose_cmd} "$@"
         fi;
-        echo
+        echo " Running regular adop containers "
         docker-compose ${ADOPFILEOPTS} ${compose_cmd} "$@"
     fi
 }
