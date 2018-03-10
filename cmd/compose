@@ -301,9 +301,9 @@ run_compose() {
         # Handle up vs up -d so that we can launch the main Compose file
         if [ "${compose_cmd}" = "up" ] && [[ $@ != *"-d"* ]]; then
           echo "* Starting ELK with 'up -d' instead of just the requested 'up'"
-          docker-compose ${ELKFILEOPTS} ${compose_cmd} "$@" && docker-compose ${DOCKPROMFILEOPTS} ${compose_cmd} "$@" -d && docker-compose ${GITLABFILEOPTS} ${compose_cmd} "$@" -d
+          #docker-compose ${ELKFILEOPTS} ${compose_cmd} "$@" && docker-compose ${DOCKPROMFILEOPTS} ${compose_cmd} "$@" -d && docker-compose ${GITLABFILEOPTS} ${compose_cmd} "$@" -d
         else
-          docker-compose ${ELKFILEOPTS} ${compose_cmd} "$@" && docker-compose ${DOCKPROMFILEOPTS} ${compose_cmd} "$@" && docker-compose ${GITLABFILEOPTS} ${compose_cmd} "$@"
+          #docker-compose ${ELKFILEOPTS} ${compose_cmd} "$@" && docker-compose ${DOCKPROMFILEOPTS} ${compose_cmd} "$@" && docker-compose ${GITLABFILEOPTS} ${compose_cmd} "$@"
         fi;
         echo
         docker-compose ${ADOPFILEOPTS} ${OVERRIDES} ${compose_cmd} "$@"
