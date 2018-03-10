@@ -311,7 +311,7 @@ run_compose() {
         pwd 
         ls -lrth
         cat docker-compose.yml
-        docker-compose ${ADOPFILEOPTS} ${compose_cmd} "$@"
+        #docker-compose ${ADOPFILEOPTS} ${compose_cmd} "$@"
     fi
 }
 
