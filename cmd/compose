@@ -376,5 +376,6 @@ case ${SUBCOMMAND_OPT} in
         ;;
     *)
         #run_compose ${SUBCOMMAND_OPT} "$@"
+        echo " Skipping..."
         ;;
 esac
