@@ -132,11 +132,11 @@ done
         echo "* Skipping Pulling Docker Images"
     else
         echo "* Pulling Docker Images"
-        run_compose pull
+        #run_compose pull
     fi
 
     echo "* Bringing up ADOP..."
-    run_compose up -d
+    #run_compose up -d
 
     # Wait for Jenkins to come up before proceeding (Should add Gitlab to this check when its fully integrated)
     echo "* Waiting for the Platform to become available - this can take a few minutes"
